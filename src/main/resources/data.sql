@@ -1,0 +1,1 @@
+select now(); -- data.sql이 비어있으면 에러나서 아무 sql문 써서 test돌리기.
