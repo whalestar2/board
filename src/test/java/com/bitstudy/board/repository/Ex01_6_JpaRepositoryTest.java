@@ -34,6 +34,7 @@ class Ex01_6_JpaRepositoryTest {
     @Test
     void selectTest() {
         List<Ex01_1_Article_엔티티로_등록> articles = articleRepository.findAll();
+<<<<<<< HEAD
         assertThat(articles).isNotNull().hasSize(1000);
     }
 
@@ -43,6 +44,11 @@ class Ex01_6_JpaRepositoryTest {
 
     //mockaroo: 가짜 데이터 불러오기 (mock: 가짜)-> sql 데이터 다운로드해서 data.sql에 복붙.
 
+=======
+        assertThat(articles).isNotNull().hasSize(0);
+    }
+
+>>>>>>> 99dac501c245056bf6276d5fcfc5a223a117c102
 }
 
 

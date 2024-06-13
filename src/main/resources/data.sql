@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- select now(); -- data.sql이 비어있으면 에러나서 아무 sql문 써서 test돌리기.
 
 
@@ -1001,3 +1002,6 @@ insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Nulla suscipit ligula in lacus.', 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet.', 'Red', '2024-01-08 21:06:48', 'Dal', '2023-11-27 12:20:35', 'Leonie');
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.', null, '2023-08-03 13:13:32', 'Aldon', '2024-05-01 13:36:27', 'Kenneth');
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Pellentesque ultrices mattis odio.', 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.', 'Blue', '2024-05-27 17:39:28', 'Beverie', '2024-04-26 13:45:57', 'Reagen');
+=======
+select now(); -- data.sql이 비어있으면 에러나서 아무 sql문 써서 test돌리기.
+>>>>>>> 99dac501c245056bf6276d5fcfc5a223a117c102
