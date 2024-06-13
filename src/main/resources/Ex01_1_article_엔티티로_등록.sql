@@ -1,6 +1,3 @@
--- select now(); -- data.sql이 비어있으면 에러나서 아무 sql문 써서 test돌리기.
-
-
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Vestibulum ac est lacinia nisi venenatis tristique.', 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.', 'Red', '2023-11-23 18:12:24', 'Ardyth', '2023-09-26 18:49:42', 'Doro');
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Nulla mollis molestie lorem.', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.', 'Violet', '2023-06-30 01:01:24', 'Barnaby', '2024-03-21 20:17:55', 'Darby');
 insert into Ex01_1_article_엔티티로_등록 (title, content, hashtag, created_at, created_by, modified_at, modified_by) values ('Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.', null, '2023-12-27 19:40:44', 'Grace', '2024-05-27 02:20:38', 'Margery');
