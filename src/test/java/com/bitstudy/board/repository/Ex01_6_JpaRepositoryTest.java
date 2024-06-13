@@ -34,8 +34,14 @@ class Ex01_6_JpaRepositoryTest {
     @Test
     void selectTest() {
         List<Ex01_1_Article_엔티티로_등록> articles = articleRepository.findAll();
-        assertThat(articles).isNotNull().hasSize(0);
+        assertThat(articles).isNotNull().hasSize(1000);
     }
+
+//    데이터베이스에 테이블이 안 만들어지면 gradle- board - tasks - build - clean 해주고
+//    other - compilejava 하고 다시 돌려보기 (compilejava): 빌드까진 아니더라도  쭉 훑어서 필요한 거 다운해줌.
+
+
+    //mockaroo: 가짜 데이터 불러오기 (mock: 가짜)-> sql 데이터 다운로드해서 data.sql에 복붙.
 
 }
 

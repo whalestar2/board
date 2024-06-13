@@ -10,4 +10,5 @@ public class BoardApplication {
 		SpringApplication.run(BoardApplication.class, args);
 	}
 
+//사용자한테 정보를 받아서 실행
 }
