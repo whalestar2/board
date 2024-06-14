@@ -1,10 +1,8 @@
 package com.bitstudy.board.repository;
 
 import com.bitstudy.board.domain.Ex01_2_ArticleComment_엔티티로_등록;
-import com.bitstudy.board.repository.Ex01_4_ArticleRepository;
-import com.bitstudy.board.repository.Ex01_5_ArticleCommentRepository;
 import com.bitstudy.board.config.Ex01_3_JpaConfig;
-import com.bitstudy.board.domain.Ex01_1_Article_엔티티로_등록;
+import com.bitstudy.board.domain.Article;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +26,10 @@ class Ex01_6_JpaRepositoryTest {
 //    @Autowired Ex01_5_ArticleCommentRepository articleCommentRepository;
 
     // 생성자 주입
-    Ex01_4_ArticleRepository articleRepository;
-    Ex01_5_ArticleCommentRepository articleCommentRepository;
+    ArticleRepository articleRepository;
+    ArticleCommentRepository articleCommentRepository;
 
-    public Ex01_6_JpaRepositoryTest(@Autowired Ex01_4_ArticleRepository articleRepository, @Autowired Ex01_5_ArticleCommentRepository articleCommentRepository) {
+    public Ex01_6_JpaRepositoryTest(@Autowired ArticleRepository articleRepository, @Autowired ArticleCommentRepository articleCommentRepository) {
         this.articleRepository = articleRepository;
         this.articleCommentRepository = articleCommentRepository;
     }
@@ -69,7 +67,7 @@ class Ex01_6_JpaRepositoryTest {
         //given
 
         //when
-        List<Ex01_1_Article_엔티티로_등록> articles = articleRepository.findAll();
+        List<Article> articles = articleRepository.findAll();
         //then
         assertThat(articles).isNotNull().hasSize(1000);
 
@@ -79,7 +77,7 @@ class Ex01_6_JpaRepositoryTest {
     @DisplayName("select테스트 내가 직접 하기")
     @Test
     void selectTest2(){
-        List<Ex01_1_Article_엔티티로_등록> article = articleRepository.findAll();
+        List<Article> article = articleRepository.findAll();
         assertThat(article).isNotNull().hasSize(1000);
     }
 
@@ -115,9 +113,9 @@ class Ex01_6_JpaRepositoryTest {
         //when
         // 삽입 - DB에 삽입 순서: DTO에 title, content, hashtag 담아서 넘기기
 
-        Ex01_1_Article_엔티티로_등록 article = Ex01_1_Article_엔티티로_등록.of("제목1", "내용1", "Red");
+        Article article = Article.of("제목1", "내용1", "Red");
 
-        Ex01_1_Article_엔티티로_등록 saveArticle =  articleRepository.save(article);
+        Article saveArticle =  articleRepository.save(article);
 
         System.out.println("save()하고 리턴받는거: " + saveArticle);
 
@@ -135,9 +133,9 @@ class Ex01_6_JpaRepositoryTest {
 //    int가 아니라 long
         long prevCount = articleRepository.count();
 
-        Ex01_1_Article_엔티티로_등록 article2 = Ex01_1_Article_엔티티로_등록.of("제목","내용", "white");
+        Article article2 = Article.of("제목","내용", "white");
 
-        Ex01_1_Article_엔티티로_등록 insertArticle = articleRepository.save(article2);
+        Article insertArticle = articleRepository.save(article2);
 
         long currentCount = articleRepository.count();
         //isEqualsTo(값): 값과 같은가.
@@ -161,7 +159,7 @@ class Ex01_6_JpaRepositoryTest {
           3. 없으면 throw 시켜서 일단 현재 테스트는 끝나게 하기 -> .orElseThrow();
 
      */
-        Ex01_1_Article_엔티티로_등록 article = articleRepository.findById(1L).orElseThrow();
+        Article article = articleRepository.findById(1L).orElseThrow();
 
     /* 순서 - 2) 업데이트 - (해시태그 없데이트 해보기)
           1.
@@ -173,8 +171,8 @@ class Ex01_6_JpaRepositoryTest {
 
     //when - 테스트 해야하는 내용
 
-        // Ex01_1_Article_엔티티로_등록 savedArticle = articleRepository.save(article); //PK가 null이면 insert, 있으면 update 함.
-        Ex01_1_Article_엔티티로_등록 savedArticle = articleRepository.saveAndFlush(article);
+        // Article savedArticle = articleRepository.save(article); //PK가 null이면 insert, 있으면 update 함.
+        Article savedArticle = articleRepository.saveAndFlush(article);
 /*
     영속성 컨텍스트로부터 가져온 데이터를 그냥 save만 하고 아무것도 안하고 끝내버리면 어차피 롤백됨.
     테스트를 돌리면 Run탭에 마지막 메세지는 select 구문이 나온다.
@@ -207,11 +205,11 @@ class Ex01_6_JpaRepositoryTest {
     @DisplayName("update 테스트 - 내가 직접 하기")
     @Test
     void updateTest2(){
-        Ex01_1_Article_엔티티로_등록 article = articleRepository.findById(1L).orElseThrow();
+        Article article = articleRepository.findById(1L).orElseThrow();
         String updateHashtag = "black";
         article.setHashtag(updateHashtag);
 
-        Ex01_1_Article_엔티티로_등록 updatedArticle =  articleRepository.saveAndFlush(article);
+        Article updatedArticle =  articleRepository.saveAndFlush(article);
 
         assertThat(updatedArticle).hasFieldOrPropertyWithValue("hashtag", updateHashtag);
     }
@@ -232,7 +230,7 @@ class Ex01_6_JpaRepositoryTest {
 
         //given
         /* 1) 기본의 영속성 컨테스트로부터 엔티티 꺼내오기*/
-        Ex01_1_Article_엔티티로_등록 article = articleRepository.findById(1L).orElseThrow();
+        Article article = articleRepository.findById(1L).orElseThrow();
 
         /* 2)지우면 DB 개수 하나 줄어드는 거니까 미리 엔티티 개수(count) 구하기
             게시글(articleRepository) 뿐만 아니라 연관된 댓글(articleCommentRepository) 까지 삭제할 거라서 두 개 갯수를 다 뽑아야 함.
@@ -266,7 +264,7 @@ class Ex01_6_JpaRepositoryTest {
         long prevArticleCount = articleRepository.count();
         long prevArticleCommentCount = articleCommentRepository.count();
 
-        Ex01_1_Article_엔티티로_등록 article = articleRepository.findById(1L).orElseThrow();
+        Article article = articleRepository.findById(1L).orElseThrow();
 
 //        데이터 하나 뽑아낸 거랑 연동된 articleComment의 사이즈 구하기
         int articleCommentSize = article.getArticleComment().size();

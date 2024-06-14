@@ -9,21 +9,19 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
+// 데이터에 테이블 만들어질 때 대문자는 _소문자로 바뀌어서 만들어짐
 @Getter
 @ToString
-@Entity // @Entity 달린 거 파일 이름으로 테이블 만들어짐. data.sql 가져와서
+@Entity
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
-        /* AuditingFields.java 사용시 @Index 꺼를 보내야 하는데 그렇게 하지 않음.
-            못 보내는 건 아닌데 보낼려면 세팅 해야할 게 너무 많음. 그래서 비효율적임.
-         */
-
 })
 public class Article extends Ex02_3_AuditingFields {
-    @Id //@Entitiy 붙이면 반드시 있어야 함
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 고유번호
 
@@ -70,5 +68,5 @@ public class Article extends Ex02_3_AuditingFields {
     public int hashCode() { // 동일성 비교
         return Objects.hashCode(id);
     }
-
 }
+

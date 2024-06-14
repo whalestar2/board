@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-
 /** Article 과 ArticleComment 에 있는 공통 필드(메타데이터)들이 있는데 별도로 빼서 관리할거임
  *  이유: Article 과 ArticleComment 처럼 FK 키로 엮여있는 테이블들을 만드는 경우
  *       모든 domain 파일들에 중복코드 들이 들어가게 된다. (id, created_by, created_at, modified_by, modified_at)
@@ -37,25 +36,23 @@ import java.util.Set;
  *
  *       2) @MappedSuperClass - 요즘 방식(요즘 실무에서는 이거씀)
  *                              @MappedSuperClass 어노테이션이 붙은
- *                              1. domain > Ex02_3_AuditingFields 클래스 파일 생성하기
- *                              2. 공통 필들 옮겨가기 (id, created_by, created_at, modified_by, modified_at)
+ *                              1. domain > Ex02_3_AuditingFields 클래스 생성하기
+ *                              2. 공통 필드 옮겨가기 (created_by, created_at, modified_by, modified_at)
  * */
 
 @Getter
 @ToString
-//@EntityListeners(AuditingEntityListener.class) /* auditing 관련된 거. Ex02_3으로 옮겨 갈 거*/
-//@Entity // @Entity 달린 거 파일 이름으로 테이블 만들어짐. data.sql 가져와서
+//@EntityListeners(AuditingEntityListener.class) /* auditing 관련된거. Ex02_3 으로 이동해야함 */
+//@Entity
 @Table(indexes = {
         @Index(columnList = "title"),
         @Index(columnList = "hashtag"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
         /* AuditingFields.java 사용시 @Index 꺼를 보내야 하는데 그렇게 하지 않음.
-            못 보내는 건 아닌데 보낼려면 세팅 해야할 게 너무 많음. 그래서 비효율적임.
-         */
-
+         * 못보내는건 아닌데 보내려면 세팅 해야할게 너무 많음. 그래서 비 효율적임 */
 })
-public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields{
+public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; // 고유번호
@@ -76,9 +73,9 @@ public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields{
     @OrderBy("id") // 양방향 바인딩 할건데 정렬 기준은 id로 하겠다는 뜻
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL) // mappedBy로 양방향 바인딩의 이름을 지정
     @ToString.Exclude
-    private final Set<Ex02_1_Article_공통필드_분리> articleComment = new LinkedHashSet<>();
+    private final Set<Ex02_2_ArticleComment_공통필드_분리> articleComment = new LinkedHashSet<>();
 
-//auditingFields 로 옮김
+
 //    // 메타데이터
 //    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt; // 생성일시
 //    @CreatedBy @Column(nullable = false, length = 100) private String createdBy; // 생성자
@@ -135,3 +132,7 @@ public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields{
                 여러개의 객체를 비교할때 equals를 사용하면 Integer 값들을 비교할때 많은 시간과 비용이 발생함
 */
 }
+
+
+
+

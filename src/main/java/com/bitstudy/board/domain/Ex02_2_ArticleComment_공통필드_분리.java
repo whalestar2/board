@@ -15,15 +15,14 @@ import java.util.Objects;
 
 @Getter
 @ToString
-//@EntityListeners(AuditingEntityListener.class) /* auditing 관련된 거. Ex02_3으로 옮겨 갈 거*/
+//@EntityListeners(AuditingEntityListener.class)
 //@Entity
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
-         /* AuditingFields.java 사용시 @Index 꺼를 보내야 하는데 그렇게 하지 않음.
-            못 보내는 건 아닌데 보낼려면 세팅 해야할 게 너무 많음. 그래서 비효율적임.
-         */
+        /* AuditingFields.java 사용시 @Index 꺼를 보내야 하는데 그렇게 하지 않음.
+         * 못보내는건 아닌데 보내려면 세팅 해야할게 너무 많음. 그래서 비 효율적임 */
 })
 public class Ex02_2_ArticleComment_공통필드_분리 extends Ex02_3_AuditingFields {
 
@@ -39,7 +38,7 @@ public class Ex02_2_ArticleComment_공통필드_분리 extends Ex02_3_AuditingFi
     @Column(nullable = false, length = 500)
     private String content; // 본문
 
-//auditingFields 로 옮김
+
 //    // 메타데이터
 //    @CreatedDate @Column(nullable = false) private LocalDateTime createdAt; // 생성일시
 //    @CreatedBy @Column(nullable = false, length = 100) private String createdBy; // 생성자
@@ -72,6 +71,7 @@ public class Ex02_2_ArticleComment_공통필드_분리 extends Ex02_3_AuditingFi
         return Objects.hashCode(id);
     }
 }
+
 
 
 
