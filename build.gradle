@@ -37,7 +37,17 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
 
+	/* 스프링부트 3.X 대 버전 - 이거 하고 맨 아래 */
+	implementation "com.querydsl:querydsl-core"
+	implementation "com.querydsl:querydsl-collections"
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta' //javaX 는 스프링부트 2 버전 3버전에서 jakarta로 바뀜 5가 최신
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
 
+
+
+	////////////////////////////////////////////////////////////////////
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -48,3 +58,22 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+//dependency 바깥 쪽에 따로 두어야 함.
+////////////// 스프링 3버전용 - queryDSL 설정부 //////////////////
+def generated = 'src/main/generated' // Q클래스 생성 위치 //알아서 생기지만 그냥 돌리면 오류 생길 수 있음. clean 후 compileJava 로 다시 만들면 오류 안 생김
+//def querydslSrcDir = 'src/main/generated'
+clean {
+	delete file(generated)
+}
+tasks.withType(JavaCompile) {
+	options.generatedSourceOutputDirectory = file(generated)
+}
+/*
+	1. Querydsl 관련된 거 다 추가 했으면 코끼리 클릭하고
+	2. 외부 라이브러리 (External Libraries) 가보면 com.querydsl 관련된 거 있는지 확인
+	3. 화면 우측의 gradle > Tasks > build > clean 하고
+	4. gradle > Tasks > other < compilejava
+	5.
+*/
