@@ -33,6 +33,9 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
+	/* rest repo: restful 방식 가능하게, rest repo hal:api 테스트할 때 필요한 url 보이게 */
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
 
 
 	compileOnly 'org.projectlombok:lombok'
