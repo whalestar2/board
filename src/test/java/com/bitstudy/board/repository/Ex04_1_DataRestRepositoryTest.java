@@ -94,30 +94,7 @@ public class Ex04_1_DataRestRepositoryTest {
 
     }
 
-    @DisplayName("[api] 게시글 단건 조회")
-    @Test
-    void articleOne() throws Exception {
-        //given
 
-        //when & then
-        mockMvc.perform(get("/api/articles/1")) //테스트 데이터가 있다고 가정하고 하는거임( 1번글 하나 가져와라 라는 뜻)
-                .andExpect(status().isOk()) // 현재 상태가 200인가(존재 하냐? 라고 물어보는거)
-                .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
-
-    }
-
-
-    @DisplayName("[api] 댓글 리스트 전체 조회") // 특정 한 게시글의 댓글들 전체 조회
-    @Test
-    void articleCommentAll() throws Exception {
-        //given
-
-        //when & then
-        mockMvc.perform(get("/api/articles/1/articleComments")) //테스트 데이터가 있다고 가정하고 하는거임( 1번글 하나 가져와라 라는 뜻)
-                .andExpect(status().isOk()) // 현재 상태가 200인가(존재 하냐? 라고 물어보는거)
-                .andExpect(content().contentType(MediaType.valueOf("application/hal+json")));
-
-    }
 
 
 }

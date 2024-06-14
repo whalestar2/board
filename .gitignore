@@ -5,6 +5,8 @@
 
 ### QueryDsl ### generated 폴더가 git에 들어가지 않게 gitignore 설정을 직접 해줘야 함.
 ### java 파일이 수정되면 자동으로 계속 바뀌어서 수정사항이 계속 생기므로 gitigore해줌.
+# git에 없어도 되는 이유: build.gradle 의 dependency에 넣어놔서 파일 실행할 떄 자동으로 생기므로 git에 안 넣어줌.
+# 맨 앞에 / 넣어줘야함(중요)
 /src/main/generated
 
 
