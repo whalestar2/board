@@ -24,6 +24,8 @@ import java.util.Objects;
 public class Ex01_2_ArticleComment_엔티티로_등록 {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// 이게 auto_increment 임
+    // mysql auto_increment 는 IDENTITY 방식으로 만들어짐
     private Long id; // 고유번호
 
     @Setter
