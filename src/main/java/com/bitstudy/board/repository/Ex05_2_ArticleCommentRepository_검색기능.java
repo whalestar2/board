@@ -11,8 +11,7 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface ArticleCommentRepository extends
-        JpaRepository<ArticleComment, Long>
+public interface Ex05_2_ArticleCommentRepository_검색기능 extends JpaRepository<ArticleComment, Long>
         , QuerydslPredicateExecutor<ArticleComment>
         , QuerydslBinderCustomizer<QArticleComment> /* like 검색 */
 {
@@ -30,4 +29,7 @@ public interface ArticleCommentRepository extends
         2) Hal 가서 확인해보기
             ex) http://localhost:8080/api/articles?hashtag=Yell
      */
+
+
+
 }

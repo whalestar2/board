@@ -1,11 +1,24 @@
 package com.bitstudy.board.domain;
 
+import com.bitstudy.board.domain.Article;
+import com.bitstudy.board.domain.Ex02_3_AuditingFields;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
-public class ArticleComment extends Ex02_3_AuditingFields{
+
+@Getter
+@ToString
+@Entity
+@Table(indexes = {
+        @Index(columnList = "content"),
+        @Index(columnList = "createdAt"),
+        @Index(columnList = "createdBy"),
+})
+public class ArticleComment extends Ex02_3_AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
