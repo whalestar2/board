@@ -12,12 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-/*
- 하기 전에 알아둘 거: 테스트 코드 작성할 건데 일단 돌리면 404 에러남
- 이유는 Ex06_ArticleController에 작성된 내용이 없고 , dao 같은 것도 없어서
- (뷰 파일 만들고 하면 됨)
- */
-
 /*  할일 : @Disabled 어노테이션 사용법 알아두기
     하기 전에 알아둘거: 테스트 코드 작성할건데 일단 돌리면 404 에러남
     이유는 Ex06_1_ArticleController 에 작성된 내용이 없고, dao 같은 것도 없어서 그럼
@@ -41,7 +35,7 @@ class Ex06_2_ArticleControllerTest {
         4) 게시판 해시태그 검색 전용 페이지
      */
 
-    @Disabled("구현 중")
+    //    @Disabled("구현 중")
     @Test
     @DisplayName("[view][GET] 게시글 리스트 (게시판) 페이지 - 정상호출")
     public void articleAll() throws Exception {
@@ -50,7 +44,7 @@ class Ex06_2_ArticleControllerTest {
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) // 뷰 파일은 html로 만들기 때문에 데이터 타입이 html 임.
                 // contentType 는 exact match 라서 MediaType 이 쯴짜 TEXT_HTML 일때만 OK 가 뜸
                 // contentTypeCompatibleWith 는 호환되는 타입까지 OK
-                .andExpect(view().name("articles/index")) // 현재 정보를 가지고 온 문서의 이름이 index 이고 articles 폴더 안에 있는거냐?
+                .andExpect(view().name("/articles/index")) // 현재 정보를 가지고 온 문서의 이름이 index 이고 articles 폴더 안에 있는거냐?
                 .andExpect(model().attributeExists("articles")); // 해당 뷰 파일(index) 에서는 게시글들의 목록들이 쫙 떠야 하는데,
         // 그 말은 서버에서 게시글들 가져왔다는 뜻임. 그러면 모델로 데이터를 밀어넣어줬다는 뜻인데
         // 그게 있는지 없는지 검사할 수 있음
@@ -58,16 +52,16 @@ class Ex06_2_ArticleControllerTest {
     }
 
 
-    @Disabled("구현 중")
+    //    @Disabled("구현 중")
     @Test
     @DisplayName("[view][GET] 게시글(상세) 페이지 - 정상호출")
     public void articleOne() throws Exception {
         mvc.perform(get("/articles/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
-                .andExpect(view().name("articles/detail"))
+                .andExpect(view().name("/articles/detail"))
                 .andExpect(model().attributeExists("articles"))
-                .andExpect(model().attributeExists("articlesComments")); // 상세페이지에는 댓글들도 여러개 있을수 있으니 모델에 articlesComments 도 키값으로 있을거임
+                .andExpect(model().attributeExists("articleComments")); // 상세페이지에는 댓글들도 여러개 있을수 있으니 모델에 articlesComments 도 키값으로 있을거임
     }
 
 
@@ -95,5 +89,7 @@ class Ex06_2_ArticleControllerTest {
 
 }
 
-/* 다 하면 resources > templates > articles 폴더 만들고 > index.html 파일 생성 */
+/* 다 하면 resources > templates > articles 폴더 만들고 > Ex06_3_index.html 파일 생성 */
+
+
 
