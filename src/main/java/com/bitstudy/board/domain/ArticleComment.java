@@ -11,7 +11,7 @@ import java.util.Objects;
 
 
 @Getter
-@ToString
+@ToString(callSuper = true)/*부모 클래스의 toString 메서드 호출을 포함하여 현재 클래스의 toString 메서드를 자동으로 생성해 줌. 주로 상속 구조에서 부모 클래스의 필드 값을 toString 결과에 포함하고자 할 때 사용됨.*/
 @Entity
 @Table(indexes = {
         @Index(columnList = "content"),
@@ -28,6 +28,16 @@ public class ArticleComment extends Ex02_3_AuditingFields {
     @ManyToOne(optional = false)
     private Article article; // 연관관계 매핑.
 
+    /* 추가 - 유저 정보(userId), 양방향 바인딩 */
+    @Setter
+    @ManyToOne(optional = false)
+//    @JoinColumn(name = "userId")
+    private UserAccount userAccount;
+
+
+
+
+
     @Setter
     @Column(nullable = false, length = 500)
     private String content; // 본문
@@ -43,13 +53,18 @@ public class ArticleComment extends Ex02_3_AuditingFields {
     protected ArticleComment() {
     }
 
-    private ArticleComment(Article article, String content) {
+    /* 변경 */
+//    private ArticleComment(Article article, String content) {
+    private ArticleComment(Article article, UserAccount userAccount, String content) {
         this.content = content;
+        this.userAccount = userAccount;
         this.article = article;
     }
 
-    public static ArticleComment of(Article article, String content) {
-        return new ArticleComment(article, content);
+    /* 변경 */
+//    public static ArticleComment of(Article article, String content) {
+    public static ArticleComment of(Article article, UserAccount userAccount, String content) {
+        return new ArticleComment(article, userAccount, content);
     }
 
     @Override

@@ -13,6 +13,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
  */
 
-@RepositoryRestResource /* yaml 파일에서 detection-strategy: annotated 대응 하는 어노테이션 */
+//@RepositoryRestResource /* yaml 파일에서 detection-strategy: annotated 대응 하는 어노테이션 */
 public interface Ex03_1_ArticleRepository_api_테스트 extends JpaRepository<Article, Long> {
 }
