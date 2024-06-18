@@ -1,7 +1,5 @@
 package com.bitstudy.board.domain;
 
-import com.bitstudy.board.domain.Article;
-import com.bitstudy.board.domain.Ex02_3_AuditingFields;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,16 +7,15 @@ import lombok.ToString;
 
 import java.util.Objects;
 
-
 @Getter
-@ToString(callSuper = true)/*부모 클래스의 toString 메서드 호출을 포함하여 현재 클래스의 toString 메서드를 자동으로 생성해 줌. 주로 상속 구조에서 부모 클래스의 필드 값을 toString 결과에 포함하고자 할 때 사용됨.*/
-@Entity
+@ToString(callSuper = true)
+//@Entity
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 })
-public class ArticleComment extends Ex02_3_AuditingFields {
+public class Ex08_6_ArticleComment extends AuditingFields {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +33,6 @@ public class ArticleComment extends Ex02_3_AuditingFields {
 
 
 
-
-
     @Setter
     @Column(nullable = false, length = 500)
     private String content; // 본문
@@ -50,28 +45,29 @@ public class ArticleComment extends Ex02_3_AuditingFields {
 //    @LastModifiedBy @Column(nullable = false, length = 100) private String modifiedBy; // 수정자
 
 
-    protected ArticleComment() {
+    protected Ex08_6_ArticleComment() {
     }
+
 
     /* 변경 */
 //    private ArticleComment(Article article, String content) {
-    private ArticleComment(Article article, UserAccount userAccount, String content) {
-        this.content = content;
-        this.userAccount = userAccount;
+    private Ex08_6_ArticleComment(Article article, UserAccount userAccount, String content) {
         this.article = article;
+        this.userAccount = userAccount;
+        this.content = content;
     }
 
     /* 변경 */
 //    public static ArticleComment of(Article article, String content) {
-    public static ArticleComment of(Article article, UserAccount userAccount, String content) {
-        return new ArticleComment(article, userAccount, content);
+    public static Ex08_6_ArticleComment of(Article article, UserAccount userAccount, String content) {
+        return new Ex08_6_ArticleComment(article, userAccount, content);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ArticleComment that = (ArticleComment) o;
+        Ex08_6_ArticleComment that = (Ex08_6_ArticleComment) o;
         return Objects.equals(id, that.id);
     }
 
@@ -80,3 +76,4 @@ public class ArticleComment extends Ex02_3_AuditingFields {
         return Objects.hashCode(id);
     }
 }
+

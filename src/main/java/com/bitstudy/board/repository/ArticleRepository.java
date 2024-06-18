@@ -11,9 +11,15 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
+/*
+* findById 메서드는 Spring Data JPA에서 제공하는 기본 메서드입니다. Spring Data JPA의 JpaRepository 인터페이스를 상속받으면, findById를 비롯한 여러 CRUD 메서드를 자동으로 사용할 수 있습니다.
+JpaRepository는 CrudRepository와 PagingAndSortingRepository를 확장한 인터페이스로, 기본적인 CRUD (생성, 읽기, 갱신, 삭제) 작업과 페이징 및 정렬 기능을 제공합니다. findById 메서드는 특정 ID를 기준으로 엔티티를 조회하는 데 사용됩니다.
+* */
+
+
 @RepositoryRestResource
 public interface ArticleRepository extends
-        JpaRepository<Article, Long>
+        JpaRepository<Article, Long>  //Article 엔티티와 그 기본 키 타입인 Long을 지정
         , QuerydslPredicateExecutor<Article> /* 얘만 있어도 검색은 됨. 정확한 검색만 가능*/
         , QuerydslBinderCustomizer<QArticle> /* like 검색 */
 
