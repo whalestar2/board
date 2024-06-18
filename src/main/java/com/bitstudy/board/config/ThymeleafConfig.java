@@ -3,10 +3,14 @@ package com.bitstudy.board.config;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver;
+
+
 
 @Configuration
 public class ThymeleafConfig {
@@ -19,6 +23,9 @@ public class ThymeleafConfig {
             /* thymeleafTemplateResolver 라는 빈을 등록할건데 리턴타입은 SpringResourceTemplateResolver 다
                 그런데 스프링부트 프로젝트에 넣었을때 auto_configration 가 자동으로 잡힐거다
              */
+
+
+            /* @ConfigurationPropertiesScan /* config < ThymeleafConfig 파일 만들면 해당 config 파일이 스캔될 수 있도록 이 어노테이션을 boardapplication 달아줘야 함 */
     ) {
 
         /* 그런데 Decoupled 로직을 세팅하는건 이미 만들어져 있음. 그런데 외부 프로퍼티 이기 때문에 인식을 못한다.
